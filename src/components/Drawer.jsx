@@ -16,7 +16,7 @@ export default function Drawer() {
     left: false,
     
   });
-
+//inbuilt function added//
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
