@@ -10,13 +10,40 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-export default function Drawer() {
+import MenuIcon from '@mui/icons-material/Menu';
+
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+
+
+
+export default function Drawer({setCatg}) {
   const [state, setState] = React.useState({
-    
     left: false,
-    
   });
-//inbuilt function added//
+
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
+  const [alignment, setAlignment] = React.useState('web');
+
+  const handleChange = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -31,29 +58,29 @@ export default function Drawer() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 200 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+      <ToggleButtonGroup style={{paddingLeft:"30px"}}
+      color="primary"
+      value={alignment}
+      exclusive
+      onChange={handleChange}
+    >
+      <ToggleButton value="English">English</ToggleButton>
+      <ToggleButton value="Hindi">Hindi</ToggleButton>
+    </ToggleButtonGroup>
       </List>
       <Divider />
+      <h6 style={{paddingLeft:"8px", paddingBottom:"10px", paddingTop:"20px"}}>Categories</h6>
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {["Business", "Entertainment","General","Health", "Science","Sports", "Technology"].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+           
+            <ListItemText onClick={()=>{setCatg(text)}} primary={text} />
           </ListItem>
         ))}
       </List>
@@ -62,19 +89,22 @@ export default function Drawer() {
 
   return (
     <div>
-      {['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+      
+        <React.Fragment key={"left"}>
+        <Button onClick={toggleDrawer("left", true)}><MenuIcon fontSize="large" /></Button>
+        <ThemeProvider theme={theme}>
           <SwipeableDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
+            anchor={"left"}
+            open={state["left"]}
+            onClose={toggleDrawer("left", false)}
+            onOpen={toggleDrawer("left", true)}
           >
-            {list(anchor)}
+            {list("left")}
           </SwipeableDrawer>
+        </ThemeProvider>
+         
         </React.Fragment>
-      ))}
+     
     </div>
   );
 }
