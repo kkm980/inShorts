@@ -1,0 +1,25 @@
+.banner{
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90%;
+    background-color: #f44336;
+    margin: 20px 0 35px 0;
+    padding: 8px 20px; 
+    height: 48px;
+    padding-left: 2px;
+}
+
+._bannerText{
+    flex: 1;
+    color: white;
+    font-size: 14px;
+    font-weight: 300;
+   
+}
+
+.banner>img{
+    height: 90%;
+}

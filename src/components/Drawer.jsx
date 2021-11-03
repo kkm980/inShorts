@@ -77,7 +77,7 @@ export default function Drawer({setCatg}) {
       <Divider />
       <h6 style={{paddingLeft:"8px", paddingBottom:"10px", paddingTop:"20px"}}>Categories</h6>
       <List>
-        {["General", "Business", "Entertainment","Science", "Technology"].map((text, index) => (
+        {["Business", "Entertainment","General","Health", "Science","Sports", "Technology"].map((text, index) => (
           <ListItem button key={text}>
            
             <ListItemText onClick={()=>{setCatg(text)}} primary={text} />
