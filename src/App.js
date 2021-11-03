@@ -32,9 +32,9 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   ourNews();
-  // }, [catg])
+  useEffect(() => {
+    ourNews();
+  }, [catg])
 
   return (
   
