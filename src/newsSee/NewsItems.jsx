@@ -12,7 +12,7 @@ function NewsItems({catg, newsItem, newsNumb}) {
              <span className="newsTitle">
              {newsItem.title}
              </span>
-
+               <br/>{" "}
              <span className="author">
                <a target="_blank" rel="noreferrer" href={newsItem.url}>{newsItem.url}
                <b>short</b>
@@ -25,7 +25,7 @@ function NewsItems({catg, newsItem, newsNumb}) {
               </div>
               <span className="readmore">
                 read more at{" "}
-                <a rel="noreferrer" href={newsItem.url} target="_blank">
+                <a className="source" rel="noreferrer" href={newsItem.url} target="_blank">
                  <b>{newsItem.source.name}</b>
                 </a>
               </span>
